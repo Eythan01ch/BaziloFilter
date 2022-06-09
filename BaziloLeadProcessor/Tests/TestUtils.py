@@ -11,6 +11,7 @@ from BaziloLeadProcessor.models import APIUtils
 
 class TestUtils(TestCase):
 	def __init__(self, *args, **kwargs):
+		self.setup_init()
 		token = Token.objects.get(user__username='user')
 		self.my_client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
 
