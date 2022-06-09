@@ -60,7 +60,7 @@ class TestUtils(TestCase):
 		)
 		Token.objects.create(
 			user_id=User.objects.get(username='user').id,
-			key='1'
+			key=str(User.objects.get(username='user').id)
 		)
 
 	def response_ok_validation(self, response):
