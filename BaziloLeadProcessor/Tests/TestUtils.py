@@ -53,12 +53,13 @@ class TestUtils(TestCase):
 			status=0,
 			credits=0,
 		)
-		User.objects.create(
-			username='user',
-			password='password',
+		if User.objects.filter(username='user').count()<0:
+		        User.objects.create(
+			        username='user',
+			        password='password',
 		)
 		Token.objects.create(
-			user_id=1,
+			user_id=User.objects.get(username='user').id,
 			key='1'
 		)
 
