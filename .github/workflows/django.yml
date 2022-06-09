@@ -22,6 +22,13 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+        
+    - name: Install mysql
+      run: |
+        sudo apt update     
+        sudo apt install mysql-server
+        sudo systemctl start mysql.service
+        
     - name: Install Dependencies
       run: |
         sudo python3 -m pip install --upgrade pip
@@ -35,4 +42,3 @@ jobs:
         sudo python3 manage.py makemigrations
         sudo python3 manage.py migrate
         sudo python3 manage.py collectstatic
-        sudo systemctl restart gunicorn
