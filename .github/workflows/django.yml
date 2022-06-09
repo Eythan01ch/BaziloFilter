@@ -26,6 +26,7 @@ jobs:
         sudo git pull origin master
         sudo python3 manage.py makemigrations
         sudo python3 manage.py migrate
+        sudo rm -rf static
         sudo python3 manage.py collectstatic
         sudo systemctl restart gunicorn nginx celery
 
