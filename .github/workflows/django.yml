@@ -25,7 +25,7 @@ jobs:
         cd ~/app/BaziloFilter
         sudo git pull origin master
         sudo python3 manage.py makemigrations
-        sudo python3 manahe.py migrate
+        sudo python3 manage.py migrate
         sudo python3 manage.py collectstatic
         sudo systemctl restart gunicorn nginx celery
 
