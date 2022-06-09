@@ -27,14 +27,15 @@ jobs:
       run: |
         sudo apt update     
         sudo apt install mysql-server
+        sudo apt-get install --reinstall libpq-dev
         sudo systemctl start mysql.service
         
     - name: Install Dependencies
       run: |
         sudo python3 -m pip install --upgrade pip
         sudo pip3 install -r requirements.txt
-        sudo apt-get install mysql
-        sudo apt-get install --reinstall libpq-dev
+
+        
 
     - name: Run automated deployment
       run: |
