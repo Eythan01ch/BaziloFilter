@@ -1,0 +1,9 @@
+[client]
+
+database = djangodb
+
+user = django-app
+
+password = last1
+
+default-character-set = utf8

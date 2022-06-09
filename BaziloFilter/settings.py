@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -71,19 +71,38 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'BaziloFilter.wsgi.application'
+STATICFILES_DIR=[
+    BASE_DIR/"static",
+]
 
+WSGI_APPLICATION = 'BaziloFilter.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.mysql',
+
+        'OPTIONS': {
+
+            'read_default_file': os.path.join(BASE_DIR,'mysqldb.cnf'),
+
+        },
+}
 }
 
+CACHES = {
+
+    'default': {
+
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+
+        'LOCATION': 'redis://127.0.0.1:6379',
+
+    }
+
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -119,11 +138,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_URL = '/static/'
+STATIC_ROOT = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Celery Configuration Options
+
+CELERY_BROKER_URL="redis://localhost:6379"
+
+CELERY_TIMEZONE = "Africa/Douala"
+
+CELERY_TASK_TRACK_STARTED = True
+
+CELERY_TASK_TIME_LIMIT = 2
+
+CELERY_CACHE_BACKEND = "django-cache"
+
+CELERY_ACCEPT_CONTENT=["json"]
