@@ -22,6 +22,6 @@ jobs:
 
     - name: Run automated deployment
       run: |
-        cd ~/home/ubuntu/app/BaziloFilter
+        cd ~/app/BaziloFilter
         sudo python3 manage.py test
 
