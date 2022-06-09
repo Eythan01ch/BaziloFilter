@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     
     strategy:
       max-parallel: 4
@@ -18,26 +18,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-        
-    - name: Install mysql
-      run: |
-        sudo apt update     
-        sudo apt install mysql-server
-        sudo apt-get install --reinstall libpq-dev
-        sudo systemctl start mysql.service
-        
-    - name: Install Dependencies
-      run: |
-        sudo python3 -m pip install --upgrade pip
-        sudo pip3 install -r requirements.txt
 
-        
 
     - name: Run automated deployment
       run: |
+        cd ~/home/ubuntu/app/BaziloFilter
         sudo python3 manage.py test
 
