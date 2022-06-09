@@ -23,5 +23,6 @@ jobs:
     - name: Run automated deployment
       run: |
         cd ~/app/BaziloFilter
+        sudo git pull origin master
         sudo python3 manage.py test
 
