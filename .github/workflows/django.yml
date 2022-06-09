@@ -40,6 +40,4 @@ jobs:
     - name: Run automated deployment
       run: |
         sudo python3 manage.py test
-        sudo python3 manage.py makemigrations
-        sudo python3 manage.py migrate
-        sudo python3 manage.py collectstatic
+
